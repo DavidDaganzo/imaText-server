@@ -8,19 +8,21 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 router.post('/', async (req, res) => {
-  const { prompt, size } = req.body;
+  const { prompt, imgSide } = req.body;
+  console.log('imgSide:', imgSide)
 
   const imageSize =
-    size === 'small' ? '256x256' : size === 'medium' ? '512x512' : '1024x1024';
-
+    imgSide === 'small' ? '256x256' : imgSide === 'medium' ? '512x512' : '1024x1024';
+  console.log('imageSize:', imageSize)
   try {
     const response = await openai.createImage({
-      // prompt,
-      prompt: 'Spanish super hero lifting a car with his hand',
+      prompt,
+      // prompt: 'High quality realistic photography of a superhero dressed in a Spanish costume in the Plaza del Sol, Madrid 4k',
       n: 1,
       size: imageSize,
     });
     const imageUrl = response.data.data[0].url;
+
 
     res.status(200).json({
       success: true,
