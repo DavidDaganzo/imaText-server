@@ -17,7 +17,6 @@ router.post('/', async (req, res) => {
   try {
     const response = await openai.createImage({
       prompt,
-      // prompt: 'High quality realistic photography of a superhero dressed in a Spanish costume in the Plaza del Sol, Madrid 4k',
       n: 1,
       size: imageSize,
     });
